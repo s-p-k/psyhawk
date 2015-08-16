@@ -7,7 +7,6 @@
 # PSYclan Assault Cube servers in mind but it should work for any Assault Cube
 # server configuration if the variables are changed appropriately.
 # for bugs, sent a mail to moisp@alterland.net
-#
 
 ################################################################################
 # psyhawk variables
@@ -15,7 +14,7 @@
 
 # set the array of your servers e.g. SERVERS=(SERVER1 SERVER2 SERVER4)
 # NOTE: put just the names here the paths are set below
-SERVERS=(3 4 5)
+SERVERS=(3 4 5 6 8)
 
 # where are your servers located
 SERVER_DIR="$HOME/repos/psyhawk/servers"
@@ -26,7 +25,9 @@ BLKLSTFILE="$TEMPLT_DIR/serverblacklist.cfg"
 WHTLISTFILE="$TEMPLT_DIR/nicknameblacklist.cfg"
 ADMFILE="$TEMPLT_DIR/serverpwd.cfg"
 
-printf "updating servers...\n"
+################################################################################
+
+printf "updating whitelist, blacklist and serverpwd in selected servers...\n"
 
 for server in ${SERVERS[@]}
 do
@@ -44,4 +45,3 @@ cp -u "$WHTLISTFILE" "$SERVER_DIR/WHITELIST.txt"
 printf "servers %s where updated succesfully\n" "${SERVERS[*]}"
 printf "don't forget to update your changelog file too.\n"
 
-#echo "$SERVER_DIR/1/congig/serverblacklist.cfg"
