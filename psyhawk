@@ -1,0 +1,47 @@
+#!/bin/bash
+# See LICENSE file for details
+# version 0.1
+#
+# psyhawk is a simple script to help Assault Cube game server admins update their
+# servers by just updating the template file. It was written for use with the
+# PSYclan Assault Cube servers in mind but it should work for any Assault Cube
+# server configuration if the variables are changed appropriately.
+# for bugs, sent a mail to moisp@alterland.net
+#
+
+################################################################################
+# psyhawk variables
+################################################################################
+
+# set the array of your servers e.g. SERVERS=(SERVER1 SERVER2 SERVER4)
+# NOTE: put just the names here the paths are set below
+SERVERS=(3 4 5)
+
+# where are your servers located
+SERVER_DIR="$HOME/repos/psyhawk/servers"
+# where is your template server file located
+TEMPLT_DIR="$HOME/repos/psyhawk/template/config"
+
+BLKLSTFILE="$TEMPLT_DIR/serverblacklist.cfg"
+WHTLISTFILE="$TEMPLT_DIR/nicknameblacklist.cfg"
+ADMFILE="$TEMPLT_DIR/serverpwd.cfg"
+
+printf "updating servers...\n"
+
+for server in ${SERVERS[@]}
+do
+    cp -u "$BLKLSTFILE" "$SERVER_DIR/$server/config/serverblacklist.cfg"
+    cp -u "$WHTLISTFILE" "$SERVER_DIR/$server/config/nicknameblacklist.cfg"
+    cp -u "$ADMFILE" "$SERVER_DIR/$server/config/serverpwd.cfg"
+done
+
+# depending on your configuration you might don't want the lines below so
+# comment them if that's the case.
+
+cp -u "$BLKLSTFILE" "$SERVER_DIR/BLACKLIST.txt"
+cp -u "$WHTLISTFILE" "$SERVER_DIR/WHITELIST.txt"
+
+printf "servers %s where updated succesfully\n" "${SERVERS[*]}"
+printf "don't forget to update your changelog file too.\n"
+
+#echo "$SERVER_DIR/1/congig/serverblacklist.cfg"
